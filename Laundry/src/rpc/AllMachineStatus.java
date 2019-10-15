@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import db.MySQLDBConnection;
 import module.Laundry;
 
 /**
@@ -33,7 +34,8 @@ public class AllMachineStatus extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<Laundry> list = Laundry.getDummyData();
+		MySQLDBConnection connect = new MySQLDBConnection();
+		List<Laundry> list = connect.getAllMachineStatus();
 		JSONArray array = new JSONArray();
 		for(Laundry landuary: list) {
 			array.put(landuary.toJSONObject());

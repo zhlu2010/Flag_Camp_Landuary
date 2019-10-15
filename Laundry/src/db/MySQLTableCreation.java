@@ -45,15 +45,15 @@ public class MySQLTableCreation {
 					+ "password VARCHAR(255) NOT NULL,"
 					+ "first_name VARCHAR(255),"
 					+ "last_name VARCHAR(255),"
-					+ "phone VARCHAR(255)"
-					+ "is_admin BOOLEAN NOT NULL"
+					+ "phone VARCHAR(255),"
+					+ "is_admin BOOLEAN NOT NULL,"
 					+ "PRIMARY KEY (user_id)"
 					+ ")";
 			statement.executeUpdate(sql);
 
 			sql = "CREATE TABLE report ("
 					+ "user_id VARCHAR(255) NOT NULL,"
-					+ "info VARCHAR(255) NOT NULL,"
+					+ "info VARCHAR(255) NOT NULL"
 					+ ")";
 			statement.executeUpdate(sql);
 
@@ -67,6 +67,7 @@ public class MySQLTableCreation {
 			statement.executeUpdate(sql);
 
 			sql = "INSERT INTO machines VALUES('10', '0', '50')";
+			statement.executeUpdate(sql);
 
 			conn.close();
 			System.out.println("Import done successfully");

@@ -12,7 +12,7 @@ public class Laundry {
 	private int state;
 	private int timeLeft;
 	
-	private Laundry(LanduaryBuilder builder) {
+	private Laundry(LaundryBuilder builder) {
 		this.machineId = builder.machineId;
 		this.state = builder.state;
 		this.timeLeft = builder.timeLeft;
@@ -42,7 +42,7 @@ public class Laundry {
 		return obj;
 	}
 		
-	public static class LanduaryBuilder {
+	public static class LaundryBuilder {
 		private int machineId;
 		private int state;
 		private int timeLeft;
@@ -70,18 +70,4 @@ public class Laundry {
 			return new Laundry(this);
 		}
 	}
-	
-	public static List<Laundry> getDummyData() {
-		List<Laundry> list = new ArrayList<>();
-		LanduaryBuilder builder = new LanduaryBuilder();
-		builder.setMachineId(10);
-		builder.setState(0);
-		builder.setTimeLeft(50);
-		list.add(builder.build());
-		builder.setMachineId(4);
-		builder.setState(1);
-		builder.setTimeLeft(14);
-		list.add(builder.build());
-		return list;
-	} 
 }
