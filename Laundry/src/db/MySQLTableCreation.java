@@ -10,10 +10,9 @@ public class MySQLTableCreation {
 	public static void main(String[] args) {
 		try {
 			// Step 1 Connect to MySQL.
-			//System.out.println("Connecting to " + something.URL);
+			System.out.println("Connecting to " + MySQLDBUtil.URL);
 			Class.forName("com.mysql.cj.jdbc.Driver").getConstructor().newInstance();
-			Connection conn = DriverManager.getConnection("");
-
+			Connection conn = DriverManager.getConnection(MySQLDBUtil.URL);
 			if (conn == null) {
 				return;
 			}
@@ -67,6 +66,7 @@ public class MySQLTableCreation {
 					+ ")";
 			statement.executeUpdate(sql);
 
+			sql = "INSERT INTO machines VALUES('10', '0', '50')";
 
 			conn.close();
 			System.out.println("Import done successfully");

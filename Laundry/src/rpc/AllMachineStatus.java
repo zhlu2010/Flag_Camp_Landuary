@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
-import module.Landuary;
+import module.Laundry;
 
 /**
  * Servlet implementation class AllMachineStatus
@@ -33,9 +33,9 @@ public class AllMachineStatus extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<Landuary> list = Landuary.getDummyData();
+		List<Laundry> list = Laundry.getDummyData();
 		JSONArray array = new JSONArray();
-		for(Landuary landuary: list) {
+		for(Laundry landuary: list) {
 			array.put(landuary.toJSONObject());
 		}
 		RpcHelper.writeJsonArray(response, array);

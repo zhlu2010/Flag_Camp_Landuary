@@ -6,13 +6,13 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Landuary {
+public class Laundry {
 	
 	private int machineId;
 	private int state;
 	private int timeLeft;
 	
-	private Landuary(LanduaryBuilder builder) {
+	private Laundry(LanduaryBuilder builder) {
 		this.machineId = builder.machineId;
 		this.state = builder.state;
 		this.timeLeft = builder.timeLeft;
@@ -66,13 +66,13 @@ public class Landuary {
 			this.timeLeft = timeLeft;
 		}
 
-		public Landuary build() {
-			return new Landuary(this);
+		public Laundry build() {
+			return new Laundry(this);
 		}
 	}
 	
-	public static List<Landuary> getDummyData() {
-		List<Landuary> list = new ArrayList<>();
+	public static List<Laundry> getDummyData() {
+		List<Laundry> list = new ArrayList<>();
 		LanduaryBuilder builder = new LanduaryBuilder();
 		builder.setMachineId(10);
 		builder.setState(0);
