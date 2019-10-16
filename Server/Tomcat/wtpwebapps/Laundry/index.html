@@ -1,125 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="description" content="Item Recommendation">
-  	<meta name="author" content="Your Name">
-  	<title>favorite item</title>
-  	 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  	<link rel="stylesheet" href="styles/laundry.css">
+  <meta charset="UTF-8">
+  <meta name="description" content="Laundry Go">
+  <meta name="author" content="Zidi Xia">
+  <title>Laundry Go</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="styles/login.css">
 </head>
 <body>
   <header class="top-header">
     <nav class="top-nav">
-      <a href="#">Home</a>
-      <a href="#">Contact</a>
-      <a href="#">About</a>
+    <a href="#">Frequent Q&A</a>
+    <a href="#">Contact Us</a>
+     <a href="#">About Laundry Go</a>
+      
     </nav>
     <span id="welcome-msg"></span>
-    <a id="logout-link" href="logout">Logout</a>
-    <i id="avatar" class="avatar fa fa-user fa-2x"></i>
   </header>
-		
-   <div class ="container">
-		<header>
-			<p> 
-				<span>Laundry</span>
-        		<br/> Go
-			</p>
-		</header>
-		
-		 <section class="main-section">
-		 	<nav class="main-nav">
-		 		<a href="#" id="book-a-laundry-btn" class="main-nav-btn active">
-           			  Book A Laundry
-          		</a>
-      			<a href="#" id="my-laundry-room-btn" class="main-nav-btn">
-           			 My Laundry Room
-          		</a>
-   			</nav>
-   		
-   			<div id="machine_list">      			
-            			<div class="machine"> 
-            				<div class="machine_phone">         				
-            					<img alt="item image" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3967731919,3759632002&fm=26&gp=0.jpg" />
-            				</div>	
-            				<div class="status_content">
-            					<button class="book_btn">BOOK</button><br>
-            					<span class="machine_number">Machine Number:1</span><br>
-            					<span class="book_staus">Status:Occupied</span><br>
-            					<span class="waiting_time">Waiting Time:15min</span>
-            				</div>         				
-            			 </div>	
-            			 <div class="machine">
-            				<div class="machine_phone">
-            					<img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3967731919,3759632002&fm=26&gp=0.jpg" />
-            				</div>
-            				<div class="status_content">
-            					<button class="book_btn">BOOK</button><br>
-            					<span class="machine_number">Machine Number:2</span><br>
-            					<span class="book_staus">Status:Occupied</span><br>
-            					<span class="waiting_time">Waiting Time:10min</span>
-            				</div>         				
-            			 </div>	
-            			 <div class="machine">
-            				<div class="machine_photo">
-            					<img alt="item image" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3967731919,3759632002&fm=26&gp=0.jpg" />
-            				</div>
-            				<div class="status_content">
-            					<button class="book_btn">BOOK</button><br>
-            					<span class="machine_number">Machine Number:3</span><br>
-            					<span class="book_staus">Status:Occupied</span><br>
-            					<span class="waiting_time">Waiting Time:15min</span>
-            				</div>         				
-            			 </div>	
-            			 <div class="machine">
-            				<div class="machine_photo">
-            					<img alt="item image" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3967731919,3759632002&fm=26&gp=0.jpg" />
-            				</div>
-            				<div class="status_content">
-            					<button class="book_btn">BOOK</button><br>
-            					<span class="machine_number">Machine Number:4</span><br>
-            					<span class="book_staus">Status:Occupied</span><br>
-            					<span class="waiting_time">Waiting Time:15min</span>
-            				</div>         				
-            			 </div>	
-            			 <div class="machine">
-            				<div class="machine_photo">
-            					<img alt="item image" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3967731919,3759632002&fm=26&gp=0.jpg" />
-            				</div>
-            				<div class="status_content">
-            					<button class="book_btn">BOOK</button><br>
-            					<span class="machine_number">Machine Number:5</span><br>
-            					<span class="book_staus">Status:Occupied</span><br>
-            					<span class="waiting_time">Waiting Time:15min</span>
-            				</div>         				
-            			 </div>			
-            				          	
-     		 </div>
-   		</section>	
-		 	
-			
-	</div>
-	
-	<footer>
-    <p class="title">What We Do</p>
-    <p>"Help you find the best place around."</p>
-    <ul>
-      <li>
-        <p><i class="fa fa-map-o fa-2x"></i></p>
-        <p>LaiOffer office, CA</p>
-      </li>
-      <li>
-        <p><i class="fa fa-envelope-o fa-2x"></i></p>
-        <p>info@laioffer.com</p>
-      </li>
-      <li>
-        <p><i class="fa fa-phone fa-2x"></i></p>
-        <p>+1 800 123 456</p>
-      </li>
-    </ul>
-   </footer>
-   <script src="scripts/laundry.js"></script>
+  
+  <div class="container">
+    <header>
+      <p>
+        Laundry <br /> Go
+      </p>
+      
+      <p id=description>
+      A web app provides public laundry users a better experience, saving their time and improve efficiency.
+      <p/>
+
+      <div id="login-form">
+        <label for="username">Username:</label>
+        <input id="username" name="username" type="text">
+        <label for="password">Password:</label>
+        <input id="password" name="password" type="password">
+        <button id="register-form-btn">New User? Register</button>
+        <button id="login-btn">Login</button>
+        <p id="login-error"></p>
+      </div>
+      
+      <div id="register-form">
+        <label for="username">Username: *</label>
+        <input id="register-username" name="username" type="text">
+        <label for="password">Password: *</label>
+        <input id="register-password" name="password" type="password">
+        <label for="first-name">First Name: *</label>
+        <input id="register-first-name" name="first-name" type="text">
+        <label for="last-name">Last Name: *</label>
+        <input id="register-last-name" name="last-name" type="text">
+        <button id="login-form-btn">Back to Login</button>
+        <button id="register-btn">Register</button>
+        <p id="register-result"></p>
+      </div>
+</header>
+  </div>
+  
+  <script src="https://rawgit.com/emn178/js-md5/master/build/md5.min.js"></script>
+  <script src="scripts/login.js"></script>
 </body>
 </html>
