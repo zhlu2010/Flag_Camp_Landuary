@@ -68,7 +68,13 @@ public class MySQLTableCreation {
 
 			sql = "INSERT INTO machines VALUES('10', '0', '50')";
 			statement.executeUpdate(sql);
-
+			
+			sql = "INSERT INTO users VALUES('John@laioffer.com', '1234', 'John', 'Smith', '555-666-7788', false)";
+			statement.executeUpdate(sql);
+			
+			sql = "INSERT IGNORE INTO usersMachinesConnection VALUES('John@laioffer.com', '10')";
+			statement.executeUpdate(sql);
+			
 			conn.close();
 			System.out.println("Import done successfully");
 

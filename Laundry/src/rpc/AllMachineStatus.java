@@ -41,6 +41,7 @@ public class AllMachineStatus extends HttpServlet {
 			array.put(landuary.toJSONObject());
 		}
 		RpcHelper.writeJsonArray(response, array);
+		connect.close();
 	}
 
 	/**
