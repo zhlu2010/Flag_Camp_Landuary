@@ -136,11 +136,9 @@
 	  
 
   function changeMachineState(machineID) {        
- 	 var btn = document.querySelector('.book_btn');
- 	 var flag = true; 
- 	 btn.innerHTML = (flag = !flag) ? 'BOOK' : 'BOOKED';
- 	 btn.style.backgroundColor = "red";
- 	   	  			     
+ 	 var btn = document.querySelector('#btn'+machineID);
+ 		btn.innerHTML = 'BOOKED';
+ 		btn.style.backgroundColor = "red"; 	   	  			     
  }  
   
   //my laundry room
@@ -200,33 +198,39 @@
 	    	changeMachineState(machine_Id);
 	      };
 	      
-	     book_btn.appendChild(block0);
+	    
 	    status.appendChild(book_btn);
 	    
 	    var block1 = $create('br');
 	    // machine number
 	    var machine_number = $create('span');    
-	    machine_number.innerHTML = 'Machine Number:'+ machine_Id;
+	    machine_number.appendChild(block0);
+	    machine_number.innerHTML = 'Machine '+ machine_Id;
 	    machine_number.appendChild(block1);
 	    status.appendChild(machine_number);
 	    
 	    var block2 = $create('br');
 	    
 	    // book status
-	    var book_status = $create('span');    
-	    book_status.innerHTML = 'Status:'+ item.state;
+	    var book_status = $create('span');
+	    var machine_state = item.state;
+	    if (machine_state==1) book_status.innerHTML = 'Status: Ruuning';
+	    if (machine_state==0) book_status.innerHTML = 'Status: Available';
+	    if (machine_state==3) book_status.innerHTML = 'Status: Booked';
 	    book_status.appendChild(block2);
 	    status.appendChild(book_status);
-	    	    
+	        
 	    // waiting_time
 	    var waiting_time = $create('span', {
 	      className: 'waiting_time',
 	    });    
-	    waiting_time.innerHTML = 'Remaining Time:'+ item.timeLeft;
+	    waiting_time.innerHTML = 'Estimate Waiting Time: '+ item.timeLeft + ' minutes';
 	    status.appendChild(waiting_time);
-
+	   
+	    
     machine.appendChild(status);
     itemList.appendChild(machine);
+    
   }
 
   init();//函数入口
