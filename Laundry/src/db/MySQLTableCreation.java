@@ -66,7 +66,10 @@ public class MySQLTableCreation {
 					+ ")";
 			statement.executeUpdate(sql);
 
-			sql = "INSERT INTO machines VALUES('10', '0', '50')";
+			sql = "INSERT INTO machines VALUES('10', '0', '0')";
+			statement.executeUpdate(sql);
+			
+			sql = "INSERT INTO machines VALUES('5', '1', '50')";
 			statement.executeUpdate(sql);
 			
 			sql = "INSERT INTO users VALUES('John@laioffer.com', '1234', 'John', 'Smith', '555-666-7788', false)";
