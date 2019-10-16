@@ -140,7 +140,7 @@ body {
  */
 #machine_list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 200px);
+  grid-template-columns: repeat(auto-fill, 300px);
   background-color: #fff;
   color: #444;
   grid-row-gap: 20px;
@@ -223,3 +223,6 @@ footer ul li {
 	flex: 1;
 }
 
+.red{
+	background:red;
+}
