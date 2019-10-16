@@ -35,7 +35,7 @@ public class MySQLTableCreation {
 			sql = "CREATE TABLE machines ("
 					+ "machine_id VARCHAR(255) NOT NULL,"
 					+ "state INT NOT NULL,"
-					+ "time_left INT NOT NULL,"
+					+ "start_time VARCHAR(255) NOT NULL,"
 					+ "PRIMARY KEY (machine_id)"
 					+ ")";
 			statement.executeUpdate(sql);
@@ -65,11 +65,15 @@ public class MySQLTableCreation {
 					+ "FOREIGN KEY (machine_id) REFERENCES machines(machine_id)"
 					+ ")";
 			statement.executeUpdate(sql);
-
-			sql = "INSERT INTO machines VALUES('10', '0', '0')";
+			
+			String fifteenEarlier = String.valueOf(System.currentTimeMillis() - 15 * 60 * 1000);
+			
+			sql = "INSERT INTO machines VALUES('10', '1', '" + fifteenEarlier + "')";
 			statement.executeUpdate(sql);
 			
-			sql = "INSERT INTO machines VALUES('5', '1', '50')";
+			String curr = String.valueOf(System.currentTimeMillis());
+			
+			sql = "INSERT INTO machines VALUES('5', '0', '" + curr + "')";
 			statement.executeUpdate(sql);
 			
 			sql = "INSERT INTO users VALUES('John@laioffer.com', '1234', 'John', 'Smith', '555-666-7788', false)";

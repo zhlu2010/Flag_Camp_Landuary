@@ -35,7 +35,9 @@ public class Laundry {
 		try {
 			obj.put("machineId", machineId);
 			obj.put("state", state);
-			obj.put("timeLeft", timeLeft);
+			if(state == 1 || state == 2) {
+				obj.put("timeLeft", timeLeft);
+			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

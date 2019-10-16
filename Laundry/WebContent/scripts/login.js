@@ -225,7 +225,7 @@
 //  
 //  })();
 
-<script type="login.js" >
+//<script type="login.js" >
 $("#login_btn").click(function() {
     console.log('login btn clicked');
     $("#registerForm").hide();
