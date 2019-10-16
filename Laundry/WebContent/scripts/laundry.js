@@ -8,43 +8,19 @@
 
 	    document.querySelector('#book-a-laundry-btn').addEventListener('click', BookALaundry);
 	    document.querySelector('#my-laundry-room-btn').addEventListener('click', MyLaundryRoom);
-		document.querySelector('.book_btn').addEventListener('click', clickbook);   
+	    
 	  }
 
   // -----------------------------------
   // Helper Functions
   // -----------------------------------
 
-
-    function clickbook() {
-    	var btns = document.querySelectorAll('.main-nav-btn');
-
-        // deactivate all navigation buttons
-        for (var i = 0; i < btns.length; i++) {
-          btns[i].className = btns[i].className.replace(/\bactive\b/, '');
-        }
-
-        // active the one that has id = btnId
-        var btn = document.querySelector('#' + btnId);
-        btn.className += ' active';
-        
-        
-        
-    	 var btn = document.querySelector(".book_btn");
-    	  	 
-    	 
-    		 var flag = true; 
-    		 btn.innerHTML = (flag = !flag) ? 'BOOK' : 'BOOKED';
-             btn.style.background = "red";
-    	     
-    	 
-      }
-
   /**
    * A helper function that makes a navigation button active
    *
    * @param btnId - The id of the navigation button
-   */
+   **/
+   
   function activeBtn(btnId) {
     var btns = document.querySelectorAll('.main-nav-btn');
 
@@ -159,11 +135,19 @@
   }
 	  
 
-  
+  function changeMachineState(machineID) {        
+ 	 var btn = document.querySelector('.book_btn');
+ 	 var flag = true; 
+ 	 btn.innerHTML = (flag = !flag) ? 'BOOK' : 'BOOKED';
+ 	 btn.style.backgroundColor = "red";
+ 	   	  			     
+ }  
   
   //my laundry room
   function MyLaundryRoom(){
 	  activeBtn('my-laundry-room-btn');
+	  var itemList = document.querySelector('#machine_list');
+	  itemList.innerHTML = 'hhhhh';
   }
   // -------------------------------------
   // Create item list
@@ -184,56 +168,61 @@
   }
 
   function addItem(itemList, item) {
-	    var item_id = item.item_id;
-
-	    // create the <div> tag and specify the id and class attributes
-	    var machine = $create('div', {
-	      id: 'machine-' + item_id,
+	// create the <div> tag and specify the id and class attributes
+	  var machine_Id = item.machineId;
+	  var machine = $create('div', {
+	      id: 'machine-' + machine_Id,
 	      className: 'machine'
 	    });
-
-	    // set the data attribute ex. <li data-item_id="G5vYZ4kxGQVCR" data-favorite="true">
-	    machine.dataset.item_id = item_id;
-	    
-	    // item image
-	    var machinephoto = $create('div',{className:machine_phone});
+	  
+	 
+	  // item image
+	    var machinephoto = $create('div');
 	   	    
 	    if (item.image_url) {
 	      machinephoto.appendChild($create('img', { src: item.image_url }));
 	    } else {
 	      machinephoto.appendChild($create('img', {
-	        src: 'https://s3-media3.fl.yelpcdn.com/bphoto/EmBj4qlyQaGd9Q4oXEhEeQ/ms.jpg'
+	        src: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3967731919,3759632002&fm=26&gp=0.jpg'
 	      }));
-	    }    
+	    }
 	    machine.appendChild(machinephoto);
-	    
-	    // status_content
-	    var status = $create('div', {className: status_content});
+	  
+	    //machine-info
+	   var status = $create('div');
 	    
 	    //book button
-	    var book_btn= $create('button',{className: 'book_btn'});
+	    var block0 = $create('br');
+	    var book_btn= $create('button',{id: 'btn'+ machine_Id, className: 'book_btn'});
 	    book_btn.innerHTML = 'BOOK';
+	    
+	    book_btn.onclick = function() {
+	    	changeMachineState(machine_Id);
+	      };
+	      
+	     book_btn.appendChild(block0);
 	    status.appendChild(book_btn);
 	    
+	    var block1 = $create('br');
 	    // machine number
-	    var machine_number = $create('span', {
-	      className: 'machine_number',
-	    });    
-	    machine_number.innerHTML = 'Machine Number:'+ item_id;
+	    var machine_number = $create('span');    
+	    machine_number.innerHTML = 'Machine Number:'+ machine_Id;
+	    machine_number.appendChild(block1);
 	    status.appendChild(machine_number);
-	 
+	    
+	    var block2 = $create('br');
+	    
 	    // book status
-	    var book_status = $create('span', {
-	      className: 'book_staus',
-	    });    
-	    machine_number.innerHTML = 'Status:'+ item.status;
+	    var book_status = $create('span');    
+	    book_status.innerHTML = 'Status:'+ item.state;
+	    book_status.appendChild(block2);
 	    status.appendChild(book_status);
-	  
+	    	    
 	    // waiting_time
 	    var waiting_time = $create('span', {
 	      className: 'waiting_time',
 	    });    
-	    machine_number.innerHTML = 'Remaining Time:'+ item.remainingtime;
+	    waiting_time.innerHTML = 'Remaining Time:'+ item.timeLeft;
 	    status.appendChild(waiting_time);
 
     machine.appendChild(status);
