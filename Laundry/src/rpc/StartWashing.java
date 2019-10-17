@@ -46,7 +46,7 @@ public class StartWashing extends HttpServlet {
 			if(proxy.start(userId, machineId)) {
 				obj.put("status", "OK");
 			} else {
-				obj.put("status", "Machine occupied");
+				obj.put("status", "Can not start");
 			}
 			RpcHelper.writeJsonObject(response, obj);
 		} catch(JSONException e) {

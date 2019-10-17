@@ -62,7 +62,7 @@ public class Simulator {
 				proxy.idleTimeOut(machineId);
 			}
 			
-		}, IDLE_TIME * 1000);
+		}, IDLE_TIME * 2 * 1000);
 	}
 	
 	public void pickup() {
