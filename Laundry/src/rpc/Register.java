@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import business.Proxy;
 import db.MySQLDBConnection;
 
 /**
@@ -32,8 +33,8 @@ public class Register extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		MySQLDBConnection connection = new MySQLDBConnection();
 		try {
+			Proxy proxy = Proxy.getInstance();
 			JSONObject input = RpcHelper.readJSONObject(request);
 			String userId = input.getString("user_id");
 			String password = input.getString("password");
@@ -42,7 +43,7 @@ public class Register extends HttpServlet {
 			String phone = input.getString("phone_number");
 
 			JSONObject obj = new JSONObject();
-			if (connection.registerUser(userId, password, firstname, lastname, phone)) {
+			if (proxy.registerUser(userId, password, firstname, lastname, phone)) {
 				obj.put("status", "OK");
 			} else {
 				obj.put("status", "User Already Exists");
@@ -50,9 +51,7 @@ public class Register extends HttpServlet {
 			RpcHelper.writeJsonObject(response, obj);
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			connection.close();
-		}
+		} 
 	}
 
 }

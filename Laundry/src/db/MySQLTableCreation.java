@@ -68,7 +68,7 @@ public class MySQLTableCreation {
 			
 			String fifteenEarlier = String.valueOf(System.currentTimeMillis() - 15 * 60 * 1000);
 			
-			sql = "INSERT INTO machines VALUES('10', '1', '" + fifteenEarlier + "')";
+			sql = "INSERT INTO machines VALUES('10', '0', '" + fifteenEarlier + "')";
 			statement.executeUpdate(sql);
 			
 			String curr = String.valueOf(System.currentTimeMillis());
@@ -78,10 +78,7 @@ public class MySQLTableCreation {
 			
 			sql = "INSERT INTO users VALUES('John@laioffer.com', '1234', 'John', 'Smith', '555-666-7788', false)";
 			statement.executeUpdate(sql);
-			
-			sql = "INSERT IGNORE INTO usersMachinesConnection VALUES('John@laioffer.com', '10')";
-			statement.executeUpdate(sql);
-			
+						
 			conn.close();
 			System.out.println("Import done successfully");
 

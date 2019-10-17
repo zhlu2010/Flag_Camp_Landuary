@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
+import business.Proxy;
 import db.MySQLDBConnection;
 
 /**
@@ -32,14 +33,14 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		MySQLDBConnection connection = new MySQLDBConnection();
+		Proxy proxy = Proxy.getInstance();
 		try {
 			HttpSession session = request.getSession(false);
 			JSONObject obj = new JSONObject();
 			if (session != null) {
 				String userId = session.getAttribute("user_id").toString();
-				obj.put("status", "OK").put("user_id", userId).put("name", connection.getFullname(userId))
-					.put("is_admin", connection.isAdmin(userId));
+				obj.put("status", "OK").put("user_id", userId).put("name", proxy.getFullname(userId))
+					.put("is_admin", proxy.isAdmin(userId));
 			} else {
 				obj.put("status", "Invalid Session");
 				response.setStatus(403);
@@ -47,8 +48,6 @@ public class Login extends HttpServlet {
 			RpcHelper.writeJsonObject(response, obj);
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			connection.close();
 		}
 	}
 
@@ -57,19 +56,19 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		MySQLDBConnection connection = new MySQLDBConnection();
+		Proxy proxy = Proxy.getInstance();
 		try {
 			JSONObject input = RpcHelper.readJSONObject(request);
 			String userId = input.getString("user_id");
 			String password = input.getString("password");
 			
 			JSONObject obj = new JSONObject();
-			if (connection.verifyLogin(userId, password)) {
+			if (proxy.verifyLogin(userId, password)) {
 				HttpSession session = request.getSession();
 				session.setAttribute("user_id", userId);
 				session.setMaxInactiveInterval(600); //if user doesn't have activity in 600 secs
-				obj.put("status", "OK").put("user_id", userId).put("name", connection.getFullname(userId))
-					.put("is_admin", connection.isAdmin(userId));
+				obj.put("status", "OK").put("user_id", userId).put("name", proxy.getFullname(userId))
+					.put("is_admin", proxy.isAdmin(userId));
 			} else {
 				obj.put("status", "User Doesn't Exist");
 				response.setStatus(401);
@@ -78,9 +77,7 @@ public class Login extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			connection.close();
-		}
+		} 
 	}
 
 }

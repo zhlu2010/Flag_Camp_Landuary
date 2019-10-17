@@ -11,12 +11,13 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import business.Proxy;
 import db.MySQLDBConnection;
 
 /**
  * Servlet implementation class PickUpClothes
  */
-@WebServlet("/pickUpClothes")
+@WebServlet("/pickupClothes")
 public class PickUpClothes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,9 +34,9 @@ public class PickUpClothes extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		MySQLDBConnection connection = new MySQLDBConnection();
 		try {
 			HttpSession session = request.getSession(false);
+			Proxy proxy = Proxy.getInstance();
 			JSONObject obj = new JSONObject();
 			if(session == null) {
 				response.setStatus(403);
@@ -43,7 +44,7 @@ public class PickUpClothes extends HttpServlet {
 			}
 			String userId = session.getAttribute("user_id").toString();
 			int machineId = Integer.valueOf(request.getParameter("machineId"));
-			if(connection.pickUp(userId, machineId)) {
+			if(proxy.pickup(userId, machineId)) {
 				obj.put("status", "OK");
 			} else {
 				obj.put("status", "Invalid pickup");
@@ -51,8 +52,6 @@ public class PickUpClothes extends HttpServlet {
 			RpcHelper.writeJsonObject(response, obj);
 		} catch(JSONException e) {
 			e.printStackTrace();
-		} finally {
-			connection.close();
 		}
 	}
 

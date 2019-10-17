@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 
+import business.Proxy;
 import db.MySQLDBConnection;
 import module.Laundry;
 
@@ -41,9 +42,9 @@ public class GetMyMachineStatus extends HttpServlet {
 			return;
 		}
 		
-		MySQLDBConnection connection = new MySQLDBConnection();
+		Proxy proxy = Proxy.getInstance();
 		String userId = session.getAttribute("user_id").toString();
-		List<Laundry> list = connection.getMyLaundryStatus(userId);
+		List<Laundry> list = proxy.getMyMachineStatus(userId);
 		JSONArray array = new JSONArray();
 		for(Laundry laundry: list) {
 			array.put(laundry.toJSONObject());
