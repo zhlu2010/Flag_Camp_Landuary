@@ -1,28 +1,83 @@
 package module;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import business.Proxy;
+
 public class Simulator {
+	public static final int BOOK_TIME = 20;
 	public static final int WASHING_TIME = 60;
 	public static final int IDLE_TIME = 15;
 	
-	public static int timeLeft(String startTime) {
-		long st = Long.valueOf(startTime);
-		long timePast = (System.currentTimeMillis() - st) / 1000 / 60;
-		if(timePast > WASHING_TIME + IDLE_TIME) {
-			return -1 - WASHING_TIME;
-		}
-		return WASHING_TIME - (int)timePast;
-		
+	private int machineId;
+	private Timer timer;
+	
+	public Simulator(int machineId) {
+		timer = new Timer();
+		this.machineId = machineId;
 	}
 	
-	
-	//status: 0 for vacant, 1 for using, 2 for finished, 3 for idle time out
-	public static int changeStatus(int timeLeft) {
-		if(timeLeft > 0) {
-			return 1;
-		} else if(timeLeft >= IDLE_TIME * -1) {
-			return 2;
-		} else {
-			return 3;
-		}
+	public int getMachineId() {
+		return machineId;
 	}
+	
+	public void book() {
+		timer.cancel();
+		timer.purge();
+		timer = new Timer();
+		timer.schedule(new TimerTask() {
+			
+			public void run() {
+				Proxy proxy = Proxy.getInstance();
+				proxy.bookTimeOut(machineId);
+			}
+			
+		}, BOOK_TIME * 60 * 1000);
+	}
+	
+	public void start() {
+		timer.cancel();
+		timer.purge();
+		timer = new Timer();
+		timer.schedule(new TimerTask() {
+			
+			public void run() {
+				Proxy proxy = Proxy.getInstance();
+				proxy.washingFinished(machineId);
+				waitingForPickup();
+			}
+			
+		}, WASHING_TIME * 1000);
+	}
+	
+	public void waitingForPickup() {
+		timer.cancel();
+		timer.purge();
+		timer = new Timer();
+		timer.schedule(new TimerTask() {
+			
+			public void run() {
+				Proxy proxy = Proxy.getInstance();
+				proxy.idleTimeOut(machineId);
+			}
+			
+		}, IDLE_TIME * 2 * 1000);
+	}
+	
+	public void pickup() {
+		timer.cancel();
+		timer.purge();
+	}
+	
+	public static int timeLeft(int state, String startTime) {
+		long timePast = (System.currentTimeMillis() - Long.valueOf(startTime)) / 60 / 1000;
+		switch(state) {
+			case 1: return BOOK_TIME - (int)timePast;
+			case 2: return WASHING_TIME - (int)timePast;
+			case 3: return IDLE_TIME - (int)timePast;
+		}
+		return -1;
+	}
+
 }

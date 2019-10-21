@@ -12,19 +12,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import business.Proxy;
-import db.MySQLDBConnection;
 
 /**
- * Servlet implementation class BookLaundry
+ * Servlet implementation class StartWashing
  */
-@WebServlet("/bookLaundry")
-public class BookLaundry extends HttpServlet {
+@WebServlet("/startWashing")
+public class StartWashing extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BookLaundry() {
+    public StartWashing() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +32,7 @@ public class BookLaundry extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
 		try {
 			HttpSession session = request.getSession(false);
 			JSONObject obj = new JSONObject();
@@ -44,10 +43,10 @@ public class BookLaundry extends HttpServlet {
 			Proxy proxy = Proxy.getInstance();
 			String userId = session.getAttribute("user_id").toString();
 			int machineId = Integer.valueOf(request.getParameter("machineId"));
-			if(proxy.bookMachine(userId, machineId)) {
+			if(proxy.start(userId, machineId)) {
 				obj.put("status", "OK");
 			} else {
-				obj.put("status", "Machine occupied");
+				obj.put("status", "Can not start");
 			}
 			RpcHelper.writeJsonObject(response, obj);
 		} catch(JSONException e) {
