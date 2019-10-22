@@ -20,6 +20,10 @@ public class Simulator {
 		this.machineId = machineId;
 	}
 	
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	
 	public int getMachineId() {
 		return machineId;
 	}

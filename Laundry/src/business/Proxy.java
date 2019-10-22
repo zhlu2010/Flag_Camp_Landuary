@@ -57,7 +57,8 @@ public class Proxy {
 		}
 		connection.updateMachineState(machineId, 1, String.valueOf(System.currentTimeMillis()));
 		Simulator simulator = map.getOrDefault(machineId, new Simulator(userId, machineId));
-		simulator.book();
+		simulator.setUserId(userId);
+		simulator.book();		
 		map.put(machineId, simulator);
 		return true;
 	}
@@ -68,24 +69,26 @@ public class Proxy {
 		}
 		connection.updateMachineState(machineId, 2, String.valueOf(System.currentTimeMillis()));
 		Simulator simulator = map.getOrDefault(machineId, new Simulator(userId, machineId));
+		simulator.setUserId(userId);
 		simulator.start();
 		map.put(machineId, simulator);
 		return true;
 	}
 	
 	public boolean pickup(String userId, int machineId) {
-		if(!connection.deleteUserMachineRelation(userId, machineId)) {
+		if(connection.deleteUserMachineRelation(userId, machineId)) {
 			return false;
 		}
 		connection.updateMachineState(machineId, 0, String.valueOf(System.currentTimeMillis()));
 		Simulator simulator = map.getOrDefault(machineId, new Simulator(userId, machineId));
+		simulator.setUserId(userId);
 		simulator.pickup();
 		map.put(machineId, simulator);
 		return true;
 	}
 		
 	public void bookTimeOut(String userId, int machineId) {		
-		connection.releaseMachine(machineId);
+		connection.deleteUserMachineRelation(userId, machineId);
 		connection.updateMachineState(machineId, 0, String.valueOf(System.currentTimeMillis()));
 		
 		//TODO: Send user a message
