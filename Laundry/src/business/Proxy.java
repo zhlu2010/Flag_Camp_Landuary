@@ -76,7 +76,7 @@ public class Proxy {
 	}
 	
 	public boolean pickup(String userId, int machineId) {
-		if(connection.deleteUserMachineRelation(userId, machineId)) {
+		if(!connection.deleteUserMachineRelation(userId, machineId)) {
 			return false;
 		}
 		connection.updateMachineState(machineId, 0, String.valueOf(System.currentTimeMillis()));
