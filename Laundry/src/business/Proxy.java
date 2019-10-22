@@ -4,12 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import db.MySQLDBConnection;
 import module.Simulator;
 import module.Laundry;
 
 public class Proxy {
-	
+		
 	private static Proxy proxy;
 	private Map<Integer, Simulator> map;
 	private MySQLDBConnection connection;
@@ -55,7 +56,7 @@ public class Proxy {
 			return false;
 		}
 		connection.updateMachineState(machineId, 1, String.valueOf(System.currentTimeMillis()));
-		Simulator simulator = map.getOrDefault(machineId, new Simulator(machineId));
+		Simulator simulator = map.getOrDefault(machineId, new Simulator(userId, machineId));
 		simulator.book();
 		map.put(machineId, simulator);
 		return true;
@@ -66,7 +67,7 @@ public class Proxy {
 			return false;
 		}
 		connection.updateMachineState(machineId, 2, String.valueOf(System.currentTimeMillis()));
-		Simulator simulator = map.getOrDefault(machineId, new Simulator(machineId));
+		Simulator simulator = map.getOrDefault(machineId, new Simulator(userId, machineId));
 		simulator.start();
 		map.put(machineId, simulator);
 		return true;
@@ -77,31 +78,55 @@ public class Proxy {
 			return false;
 		}
 		connection.updateMachineState(machineId, 0, String.valueOf(System.currentTimeMillis()));
-		Simulator simulator = map.getOrDefault(machineId, new Simulator(machineId));
+		Simulator simulator = map.getOrDefault(machineId, new Simulator(userId, machineId));
 		simulator.pickup();
 		map.put(machineId, simulator);
 		return true;
 	}
 		
-	public void bookTimeOut(int machineId) {		
+	public void bookTimeOut(String userId, int machineId) {		
 		connection.releaseMachine(machineId);
 		connection.updateMachineState(machineId, 0, String.valueOf(System.currentTimeMillis()));
 		
 		//TODO: Send user a message
-		System.out.println("Book time out!");
+		String message = "Book time out!";
+		String emailAddr = connection.getEmail(userId);
+		if(emailAddr != null) {
+			EmailUtils.sendEmail(new String[] {emailAddr}, EmailUtils.EMAIL_SUBJECT, message);
+		}
+		System.out.println(message);
 	}
 	
-	public void washingFinished(int machineId) {
+	public void washingFinished(String userId, int machineId) {
 		connection.updateMachineState(machineId, 3, String.valueOf(System.currentTimeMillis()));
 		
 		//TODO: Send user a message
-		System.out.println("Washing finished");
+		String message = "Washing finished";
+		String emailAddr = connection.getEmail(userId);
+		if(emailAddr != null) {
+			EmailUtils.sendEmail(new String[] {emailAddr}, EmailUtils.EMAIL_SUBJECT, message);
+		}
+		System.out.println(message);
 	}
 	
-	public void idleTimeOut(int machineId) {
+	public void idleTimeOut(String userId, int machineId) {
 		connection.updateMachineState(machineId, 4, String.valueOf(System.currentTimeMillis()));
 		
 		//TODO: Send user a message
-		System.out.println("Idle time out!");
+		String message = "Idle time out!";
+		String emailAddr = connection.getEmail(userId);
+		if(emailAddr != null) {
+			EmailUtils.sendEmail(new String[] {emailAddr}, EmailUtils.EMAIL_SUBJECT, message);
+		}
+		System.out.println(message);
+	}
+	
+	public boolean addMachine(int machineId) {
+		String curr = System.currentTimeMillis() + "";
+		return connection.addMachine(machineId, curr);
+	}
+	
+	public boolean deleteMachine(int machineId) {
+		return connection.deleteMachine(machineId);
 	}
 }

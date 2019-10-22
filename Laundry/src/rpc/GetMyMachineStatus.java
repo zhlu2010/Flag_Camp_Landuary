@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONArray;
 
 import business.Proxy;
-import db.MySQLDBConnection;
 import module.Laundry;
 
 /**

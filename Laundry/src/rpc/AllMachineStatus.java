@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 
 import business.Proxy;
-import db.MySQLDBConnection;
 import module.Laundry;
 
 /**

@@ -12,7 +12,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import business.Proxy;
-import db.MySQLDBConnection;
 
 /**
  * Servlet implementation class PickUpClothes

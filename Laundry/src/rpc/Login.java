@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 
 import business.Proxy;
-import db.MySQLDBConnection;
 
 /**
  * Servlet implementation class Login

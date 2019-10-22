@@ -14,16 +14,16 @@ import org.json.JSONObject;
 import business.Proxy;
 
 /**
- * Servlet implementation class BookLaundry
+ * Servlet implementation class DeleteMachine
  */
-@WebServlet("/bookLaundry")
-public class BookLaundry extends HttpServlet {
+@WebServlet("/deleteMachine")
+public class DeleteMachine extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BookLaundry() {
+    public DeleteMachine() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,26 +32,29 @@ public class BookLaundry extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
+		HttpSession session = request.getSession(false);
+		Proxy proxy = Proxy.getInstance();
+		if(session == null) {
+			response.setStatus(403);
+			return;
+		}
+		String userId = session.getAttribute("user_id").toString();
+		if(!proxy.isAdmin(userId)) {
+			response.setStatus(401);
+		}
 		try {
-			HttpSession session = request.getSession(false);
 			JSONObject obj = new JSONObject();
-			if(session == null) {
-				response.setStatus(403);
-				return;
-			}
-			Proxy proxy = Proxy.getInstance();
-			String userId = session.getAttribute("user_id").toString();
 			int machineId = Integer.valueOf(request.getParameter("machineId"));
-			if(proxy.bookMachine(userId, machineId)) {
+			if(proxy.deleteMachine(machineId)) {
 				obj.put("status", "OK");
 			} else {
-				obj.put("status", "Machine occupied");
+				obj.put("status", "Delete Failed");
 			}
 			RpcHelper.writeJsonObject(response, obj);
 		} catch(JSONException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	/**

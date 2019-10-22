@@ -6,9 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import module.Laundry;
 import module.Laundry.LaundryBuilder;
@@ -268,6 +266,56 @@ public class MySQLDBConnection {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, machineId);
 			return ps.executeUpdate() > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public String getEmail(String userId) {
+		if(conn == null) {
+			return null;
+		}
+		try {
+			String sql = "SELECT email FROM users WHERE user_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, userId);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				return rs.getString("email");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public boolean addMachine(int machineId, String curr) {
+		if (conn == null) {
+			return false;
+		}
+		try {
+			String sql = "INSERT INTO machines VALUES(?, ?, ?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, machineId);
+			ps.setInt(2,  0);
+			ps.setString(3,  curr);
+			return ps.executeUpdate() == 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean deleteMachine(int machineId) {
+		if (conn == null) {
+			return false;
+		}
+		try {
+			String sql = "DELETE FROM machines WHERE machine_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, machineId);
+			return ps.executeUpdate() == 1;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

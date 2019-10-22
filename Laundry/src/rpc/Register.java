@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import business.Proxy;
-import db.MySQLDBConnection;
 
 /**
  * Servlet implementation class Register
@@ -40,7 +39,7 @@ public class Register extends HttpServlet {
 			String password = input.getString("password");
 			String firstname = input.getString("first_name");
 			String lastname = input.getString("last_name");
-			String phone = input.getString("phone_number");
+			String phone = input.getString("email_address");
 
 			JSONObject obj = new JSONObject();
 			if (proxy.registerUser(userId, password, firstname, lastname, phone)) {

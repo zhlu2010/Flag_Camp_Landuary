@@ -10,11 +10,13 @@ public class Simulator {
 	public static final int WASHING_TIME = 60;
 	public static final int IDLE_TIME = 15;
 	
+	private String userId;
 	private int machineId;
 	private Timer timer;
 	
-	public Simulator(int machineId) {
+	public Simulator(String userId, int machineId) {
 		timer = new Timer();
+		this.userId = userId;
 		this.machineId = machineId;
 	}
 	
@@ -30,7 +32,7 @@ public class Simulator {
 			
 			public void run() {
 				Proxy proxy = Proxy.getInstance();
-				proxy.bookTimeOut(machineId);
+				proxy.bookTimeOut(userId, machineId);
 			}
 			
 		}, BOOK_TIME * 60 * 1000);
@@ -44,7 +46,7 @@ public class Simulator {
 			
 			public void run() {
 				Proxy proxy = Proxy.getInstance();
-				proxy.washingFinished(machineId);
+				proxy.washingFinished(userId, machineId);
 				waitingForPickup();
 			}
 			
@@ -59,7 +61,7 @@ public class Simulator {
 			
 			public void run() {
 				Proxy proxy = Proxy.getInstance();
-				proxy.idleTimeOut(machineId);
+				proxy.idleTimeOut(userId, machineId);
 			}
 			
 		}, IDLE_TIME * 2 * 1000);

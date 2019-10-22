@@ -1,7 +1,6 @@
 package db;
 
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Connection;
 
@@ -45,7 +44,7 @@ public class MySQLTableCreation {
 					+ "password VARCHAR(255) NOT NULL,"
 					+ "first_name VARCHAR(255),"
 					+ "last_name VARCHAR(255),"
-					+ "phone VARCHAR(255),"
+					+ "email VARCHAR(255),"
 					+ "is_admin BOOLEAN NOT NULL,"
 					+ "PRIMARY KEY (user_id)"
 					+ ")";
@@ -76,9 +75,12 @@ public class MySQLTableCreation {
 			sql = "INSERT INTO machines VALUES('5', '0', '" + curr + "')";
 			statement.executeUpdate(sql);
 			
-			sql = "INSERT INTO users VALUES('John@laioffer.com', '1234', 'John', 'Smith', '555-666-7788', false)";
+			sql = "INSERT INTO users VALUES('John@laioffer.com', '1234', 'John', 'Smith', 'zhlu2010@gmail.com', false)";
 			statement.executeUpdate(sql);
 						
+			sql = "INSERT INTO users VALUES('admin', '1234', 'Zhonghao', 'Lu', 'zhlu2010@gmail.com', true)";
+			statement.executeUpdate(sql);
+			
 			conn.close();
 			System.out.println("Import done successfully");
 
