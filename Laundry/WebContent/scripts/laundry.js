@@ -34,6 +34,7 @@
     btn.className += ' active';
   }
   
+  
   function showLoadingMessage(msg) {
 	    var itemList = document.querySelector('#machine_list');
 	    itemList.innerHTML = '<p class="notice"><i class="fa fa-spinner fa-spin"></i> ' +
@@ -138,8 +139,41 @@
   function changeMachineState(machineID) {        
  	 var btn = document.querySelector('#btn'+machineID);
  		btn.innerHTML = 'BOOKED';
- 		btn.style.backgroundColor = "red"; 	   	  			     
+ 		btn.style.backgroundColor = "red"; 	
+ 		
  }  
+ function cancelBook(machine_Id) {
+	 var btn = document.querySelector('btn'+ machine_Id);
+	 	btn.innerHTML = 'BOOK';
+		btn.style.backgroundColor = "#555555"; 
+ }
+  
+  
+  function bookLaundry(machine_Id){
+	  var btn = document.querySelector('btn'+ machine_Id);
+	  
+
+	// request parameters
+	    var url = './bookLaundry';
+	    var req = JSON.stringify({
+	      user_id: user_id,
+	      machineId: machine_Id
+	    });
+	    
+	    ajax("POST", url, req,
+	      // successful callback
+	      function(res) {
+	        var result = JSON.parse(res);
+	        if (result.status === 'OK' || result.result === 'SUCCESS') {
+	          changeMachineStatus(machine_Id);
+	        }
+	        else{
+	        	cancalBook(machine_Id);
+	        }
+	      });
+  } 
+  
+  
   
   //my laundry room
   function MyLaundryRoom(){
@@ -168,6 +202,7 @@
   function addItem(itemList, item) {
 	// create the <div> tag and specify the id and class attributes
 	  var machine_Id = item.machineId;
+	  var machine_state = item.state;
 	  var machine = $create('div', {
 	      id: 'machine-' + machine_Id,
 	      className: 'machine'
@@ -196,6 +231,7 @@
 	    
 	    book_btn.onclick = function() {
 	    	changeMachineState(machine_Id);
+	    	machine_state =3;
 	      };
 	      
 	    
@@ -213,7 +249,6 @@
 	    
 	    // book status
 	    var book_status = $create('span');
-	    var machine_state = item.state;
 	    if (machine_state==1) book_status.innerHTML = 'Status: Ruuning';
 	    if (machine_state==0) book_status.innerHTML = 'Status: Available';
 	    if (machine_state==3) book_status.innerHTML = 'Status: Booked';
