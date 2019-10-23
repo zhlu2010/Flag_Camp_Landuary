@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Item Recommendation">
+    <meta name="author" content="Your Name">
+    <title>LaundryGo</title>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/LaundryRoom.css">
+</head>
+<body>
+<header class="top-header">
+    <nav class="top-nav">
+        <a href="#" >Laundry Go</a>
+    </nav>
+    <nav class="main-nav">
+            <a href="#" id="book-a-laundry-btn" class="main-nav-btn active">
+                Book A Laundry
+            </a>
+            <a href="#" id="my-laundry-room-btn" class="main-nav-btn">
+                My Laundry Room
+            </a>
+        </nav>
+    <span id="welcome-msg"></span>
+    <a id="logout-link" href="logout">Logout</a>
+    <i id="avatar" class="avatar fa fa-user fa-2x"></i>
+</header>
+
+    <section class="main-section">
+     
+<div id="my_machine_list">
+
+                    <img class=machine_img src="img/machine.png"/>
+                
+                <div id="info">     
+                    <span class="machine_number">Machine Number:01</span><br>
+                    <span class="book_staus">Status:Occupied</span><br>
+                    <span class="waiting_time">Waiting Time:15min</span><br>
+                    <span class="note_booksuccessful">Your appointment is successful! This place will be hold for you in 15 mins!</span>
+                </div>
+				</div>
+	
+      <!--           
+        <div id="machine_list">
+            <div class="machine">
+                <div class="machine_phone">
+                    <img src="img/machine.png" />
+                </div>
+                <div class="status_content">     
+                    <span class="machine_number">Machine Number:01</span><br>
+                    <span class="time_remain">Time Remain: 15:00 mins</span><br>
+                </div>
+               </div>
+            </div>
+            
+            <div id="machine_list">
+            <div class="machine">
+                <div class="machine_phone">
+                    <img src="img/machine.png" />
+                </div>
+                <div class="status_content">     
+                    <span class="machine_number">Machine Number:01</span><br>
+                    <span class="note_complete">Hey, your laundry is complete! Please pick up your clothes in 15 mins!</span><br>
+                    <span class="notice">Notice: your clothes may pick up by laundry admin if you haven't pick it over 15 mins!</span>
+            </div>
+            </div>
+        </div>
+        
+        <div id="machine_list">
+            <div class="machine">
+                <div class="machine_phone">
+                    <img src="img/machine.png" />
+                </div>
+                <div class="status_content">     
+                    <span class="machine_number">Machine Number:01</span><br>
+                    <span class="overtime">Overtime picking up! <br> Your clothes might picked by laundry admin!</span>
+            </div>
+            </div>
+        </div> -->
+        
+    </section>
+
+<script src="scripts/laundry.js"></script>
+</body>
+</html>
