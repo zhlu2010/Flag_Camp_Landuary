@@ -109,6 +109,7 @@ body {
 #my_machine_list {
 	position:relative;
 	display: flex;
+	margin:30px;
   height:200px;
   width:1000px;
   background-color: #FFFFFF;
@@ -118,14 +119,6 @@ body {
 #info {
 	padding:50px;
 	display:block;
-	/* color:#7985b5;
-	position:absolute;
-	top:200px;
-	left:0px;
-	width:550px;
-	font-weight: 100;
-	font-size: 12px;
-	 */
 }
 
 /**
