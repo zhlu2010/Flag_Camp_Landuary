@@ -133,7 +133,7 @@ body {
 
 .machine img {
 	border: 1px solid #fff;
-	height: 150px;
+	height: 200px;
 	width: 150px;
 }
 .machine>div:first-of-type {
@@ -146,15 +146,16 @@ body {
 }
 
 .book_btn {
-  background-color: #555555; 
+  background-color: #323F75; 
   border: none;
   color: white;
   padding: 12px 28px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 10px;
+  font-size: 15px;
   margin: 4px 2px;
+  border-radius: 50% / 50%;
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
   cursor: pointer;
@@ -175,3 +176,18 @@ body {
 	font-size:20px;
 }
 
+.booked_btn {
+  background-color: red; 
+  border: none;
+  color: white;
+  padding: 12px 28px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
+  border-radius: 50% / 50%;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
