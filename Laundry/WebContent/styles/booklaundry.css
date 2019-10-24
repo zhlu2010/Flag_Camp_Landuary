@@ -1,0 +1,177 @@
+body {
+	background: #F9F9F9;
+	color: #323F75;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	font-size: 0.9em;
+}
+
+/**
+ * top header
+ */
+.top-header {
+	align-items: center;
+	background: #323f75;
+	box-shadow: 0px 2px 10px #333333;
+	display: flex;
+	height: 60px;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1;
+}
+
+.avatar {
+	background: #F9F9F9;
+	border-radius: 50%;
+	color: #333C4D;
+	height: 40px;
+	margin-right: 20px;
+    margin-left: 10px;
+	padding-left: 9px;
+	padding-top: 5px;
+	width: 40px;
+}
+
+#logout-link {
+	padding-left: 10px;
+	color: white;
+}
+
+/**
+ * top navigation
+ */
+.top-nav {
+	font-size:24px;
+	font-weight: 400;
+	flex: 1;
+}
+
+.top-nav a {
+	color: #F9F9F9;
+	font-weight: 400;
+	margin-left: 20px;
+	text-decoration: none;
+}
+
+#welcome-msg {
+	border-right: 1px solid #FFFFFF;
+	padding-right: 10px;
+}
+
+
+/**
+ * book a laundry Section
+ */
+
+/**
+ * main section
+ */
+ 
+.main-section {
+	position:relative;
+	margin: 100px auto;
+	height:auto;
+	max-width: 1100px;
+	min-width: 600px;
+}
+
+/**
+ * main navigation
+ */
+ 
+ .main-nav {
+	flex: 0.5;
+}
+
+.main-nav-btn {
+	color: #ffffff;
+	font-weight: 500;
+	font-size:1em;
+	margin-left: 50px;
+	text-decoration: none;
+  	cursor: pointer;
+}
+.main-nav-btn.active {
+	font-weight: 900;
+	color: white;
+}
+
+.main-nav-btn:hover {
+	background: rgba(255, 255, 255, 0.8);
+	color: black;
+}
+
+/**
+ * washing machine list
+ */
+
+/**
+ * washing machine list
+ */
+#machine_list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  background-color: #fff;
+  color: #444;
+  grid-row-gap: 20px;
+  grid-column-gap: 20px;
+}
+
+/**
+ * unit washing machine
+ */
+.machine {	
+  background-color: #fff;
+  color:#333C4D;
+  padding: 10px;
+  font-size: 150%;
+  margin-left:50px;
+ 
+}
+
+
+.machine img {
+	border: 1px solid #fff;
+	height: 150px;
+	width: 150px;
+}
+.machine>div:first-of-type {
+	flex: 1;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.machine span{
+	font-size: 0.5em;
+}
+
+.book_btn {
+  background-color: #555555; 
+  border: none;
+  color: white;
+  padding: 12px 28px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.book_btn:hover {
+  background-color: #f9f9f9;
+  color: #555555;
+}
+
+.grey{
+	color: #96AFBE;
+	font-size:15px;
+}
+
+.blue{
+	color: #323F75;
+	font-size:20px;
+}
+
