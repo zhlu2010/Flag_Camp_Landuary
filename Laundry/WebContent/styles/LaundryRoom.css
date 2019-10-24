@@ -117,8 +117,26 @@ body {
 }
 
 #info {
+	width: 600px;
 	padding:50px;
 	display:block;
+}
+
+/**
+ * progress bar
+ */
+ 
+ #myProgress {
+  left:245px;
+  width: 100%;
+  background-color: #f5d840;
+}
+
+#myBar {
+	/* position:absolute; */
+  width: 2%;
+  height: 20px;
+  background-color: #50CAF6;
 }
 
 /**
