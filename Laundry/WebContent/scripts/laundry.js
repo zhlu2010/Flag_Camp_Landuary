@@ -216,7 +216,8 @@
 	      machinephoto.appendChild($create('img', { src: item.image_url }));
 	    } else {
 	      machinephoto.appendChild($create('img', {
-	        src: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3967731919,3759632002&fm=26&gp=0.jpg'
+	    	  src:'machine.png'
+	        //src: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3967731919,3759632002&fm=26&gp=0.jpg'
 	      }));
 	    }
 	    machine.appendChild(machinephoto);
@@ -231,7 +232,6 @@
 	    
 	    book_btn.onclick = function() {
 	    	changeMachineState(machine_Id);
-	    	machine_state =3;
 	      };
 	      
 	    
