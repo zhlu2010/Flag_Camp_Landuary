@@ -1,4 +1,9 @@
 (function() {
+	/**
+	   * Variables
+	   */
+	  var user_id = 'John@laioffer.com';
+
 
 	/**
 	   * Initialize major event handlers
@@ -82,11 +87,14 @@
     var xhr = new XMLHttpRequest();
 
     xhr.open(method, url, true);
-
+    
     xhr.onload = function() {
       if (xhr.status === 200) {
         successCallback(xhr.responseText);
-      } else {
+      } 
+     else if (xhr.status == 403) { 
+    	errorCallback(); 
+     }else {
         errorCallback();
       }
     };
@@ -136,44 +144,39 @@
   }
 	  
 
-  function changeMachineState(machineID) {        
- 	 var btn = document.querySelector('#btn'+machineID);
+  function changeBtnColor(machineId) {        
+ 	 var btn = document.querySelector('#btn'+machineId);
  		btn.innerHTML = 'BOOKED';
- 		btn.style.backgroundColor = "red"; 	
+ 		btn.style.backgroundColor = "#F5D840";
+ 		btn.style.color = "#323F75";
  		
- }  
- function cancelBook(machine_Id) {
-	 var btn = document.querySelector('btn'+ machine_Id);
-	 	btn.innerHTML = 'BOOK';
-		btn.style.backgroundColor = "#555555"; 
- }
+ }    
   
-  
-  function bookLaundry(machine_Id){
-	  var btn = document.querySelector('btn'+ machine_Id);
-	  
+  function changeMachineState(machine_Id){
+	    //var machine = document.querySelector('#machine-'+ machine_Id);
+	    var bookbtn = document.querySelector('#btn'+ machine_Id);
+	   // var bookstatus =machine.dataset.state;
+	    	   
+	    // request parameters -ex. bookLaundry?user_id=John@laioffer.com&machineId=5
+	    var url = './bookLaundry' + '?' + 'user_id='+ user_id +'&machineId=' + machine_Id;	    
+	    var data = null;
 
-	// request parameters
-	    var url = './bookLaundry';
-	    var req = JSON.stringify({
-	      user_id: user_id,
-	      machineId: machine_Id
-	    });
-	    
-	    ajax("POST", url, req,
+	    // make AJAX call
+	    ajax('GET', url, data,
 	      // successful callback
-	      function(res) {
-	        var result = JSON.parse(res);
-	        if (result.status === 'OK' || result.result === 'SUCCESS') {
-	          changeMachineStatus(machine_Id);
+	        function(res) {
+	        	var result = JSON.parse(res);
+	        	console.log('1');
+	        	if (result.status === 'OK' || result.result === 'SUCCESS') {
+	        		console.log('2');
+	        		changeBtnColor(machine_Id);
+	        		//bookbtn.className = 'booked_btn';
 	        }
-	        else{
-	        	cancalBook(machine_Id);
-	        }
-	      });
-  } 
+	    }
+	    );
+  }
   
-  
+ 
   
   //my laundry room
   function MyLaundryRoom(){
@@ -201,13 +204,16 @@
 
   function addItem(itemList, item) {
 	// create the <div> tag and specify the id and class attributes
-	  var machine_Id = item.machineId;
+	  var machine_Id = item.machineId;	  
 	  var machine_state = item.state;
 	  var machine = $create('div', {
 	      id: 'machine-' + machine_Id,
 	      className: 'machine'
 	    });
 	  
+	  // set the data attribute 
+	  machine.dataset.machine_id = machine_Id;
+	  machine.dataset.state = machine_state;
 	 
 	  // item image
 	    var machinephoto = $create('div');
@@ -216,7 +222,7 @@
 	      machinephoto.appendChild($create('img', { src: item.image_url }));
 	    } else {
 	      machinephoto.appendChild($create('img', {
-	        src: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3967731919,3759632002&fm=26&gp=0.jpg'
+	    	  src:"img/machine.png"
 	      }));
 	    }
 	    machine.appendChild(machinephoto);
@@ -225,15 +231,33 @@
 	   var status = $create('div');
 	    
 	    //book button
-	    var block0 = $create('br');
-	    var book_btn= $create('button',{id: 'btn'+ machine_Id, className: 'book_btn'});
-	    book_btn.innerHTML = 'BOOK';
-	    
-	    book_btn.onclick = function() {
-	    	changeMachineState(machine_Id);
-	    	machine_state =3;
-	      };
-	      
+	   if (machine_state==0){
+		   var block0 = $create('br');
+		    var book_btn= $create('button',{id: 'btn'+ machine_Id, className: 'book_btn'});
+		    book_btn.innerHTML = 'BOOK';
+		    
+		    
+		    book_btn.onclick = function() {
+		    	changeMachineState(machine_Id);
+		    	//changeBtnColor(machine_Id);
+		    	BookALaundry();
+		      };
+	   }
+	   
+	   else if (machine_state==2){
+		   var block0 = $create('br');
+		    var book_btn= $create('button',{id: 'btn'+ machine_Id, className: 'book_btn'});
+		    book_btn.innerHTML = 'Book';
+		    book_btn.style.background = 'grey';
+		    		    
+	   }
+	   else if (machine_state==1){
+		   var block0 = $create('br');
+		    var book_btn= $create('button',{id: 'btn'+ machine_Id, className: 'book_btn'});
+		    book_btn.innerHTML = 'Booked';
+		    book_btn.style.backgroundColor = "#F5D840";
+	 		book_btn.style.color = "#323F75";
+	   }
 	    
 	    status.appendChild(book_btn);
 	    
@@ -249,17 +273,20 @@
 	    
 	    // book status
 	    var book_status = $create('span');
-	    if (machine_state==1) book_status.innerHTML = 'Status: Ruuning';
+	    if (machine_state==1) book_status.innerHTML = 'Status: Booked';
 	    if (machine_state==0) book_status.innerHTML = 'Status: Available';
-	    if (machine_state==3) book_status.innerHTML = 'Status: Booked';
+	    if (machine_state==2) book_status.innerHTML = 'Status: Running';
 	    book_status.appendChild(block2);
 	    status.appendChild(book_status);
 	        
 	    // waiting_time
 	    var waiting_time = $create('span', {
 	      className: 'waiting_time',
-	    });    
-	    waiting_time.innerHTML = 'Estimate Waiting Time: '+ item.timeLeft + ' minutes';
+	    });  
+	    if (machine_state==1) waiting_time.innerHTML = 'Book Session Expires in: '+ item.timeLeft + ' min';
+	    if (machine_state==0) waiting_time.innerHTML = '';
+	    if (machine_state==2) waiting_time.innerHTML = 'Estimate Waiting Time: '+ item.timeLeft + ' min';
+
 	    status.appendChild(waiting_time);
 	   
 	    
