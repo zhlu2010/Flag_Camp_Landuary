@@ -54,7 +54,7 @@ public class Simulator {
 				waitingForPickup();
 			}
 			
-		}, WASHING_TIME * 1000);
+		}, WASHING_TIME * 60 * 1000);
 	}
 	
 	public void waitingForPickup() {
@@ -68,7 +68,7 @@ public class Simulator {
 				proxy.idleTimeOut(userId, machineId);
 			}
 			
-		}, IDLE_TIME * 2 * 1000);
+		}, IDLE_TIME * 60 * 1000);
 	}
 	
 	public void pickup() {

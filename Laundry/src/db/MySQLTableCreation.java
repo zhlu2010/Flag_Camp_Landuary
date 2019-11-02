@@ -65,15 +65,12 @@ public class MySQLTableCreation {
 					+ ")";
 			statement.executeUpdate(sql);
 			
-			String fifteenEarlier = String.valueOf(System.currentTimeMillis() - 15 * 60 * 1000);
-			
-			sql = "INSERT INTO machines VALUES('10', '0', '" + fifteenEarlier + "')";
-			statement.executeUpdate(sql);
-			
 			String curr = String.valueOf(System.currentTimeMillis());
 			
-			sql = "INSERT INTO machines VALUES('5', '0', '" + curr + "')";
-			statement.executeUpdate(sql);
+			for(int i = 1; i <= 8; i++) {
+				sql = "INSERT INTO machines VALUES('" + i + "', '0', '" + curr + "')";
+				statement.executeUpdate(sql);
+			}
 			
 			sql = "INSERT INTO users VALUES('John@laioffer.com', '1234', 'John', 'Smith', 'zhlu2010@gmail.com', false)";
 			statement.executeUpdate(sql);

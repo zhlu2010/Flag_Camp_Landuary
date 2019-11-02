@@ -1,51 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="description" content="Item Recommendation">
-  	<meta name="author" content="Your Name">
-  	<title>Laundry Go</title>
-  	 <title>LaundryGo</title>
-     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  	<link rel="stylesheet" href="styles/booklaundry.css">
+  <meta charset="UTF-8">
+  <meta name="description" content="Laundry Go">
+  <meta name="author" content="Zidi Xia">
+  <title>Laundry Go</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="styles/login.css">
 </head>
 <body>
   <header class="top-header">
     <nav class="top-nav">
-        <a href="#" >Laundry Go</a>
+    <a href="#">Frequent Q&A</a>
+    <a href="#">Contact Us</a>
+     <a href="#">About Laundry Go</a>
+      
     </nav>
-    <nav class="main-nav">
-            <a href="#" id="book-a-laundry-btn" class="main-nav-btn">
-                Book A Laundry
-            </a>
-            <a href="#" id="my-laundry-room-btn" class="main-nav-btn">
-                My Laundry Room
-            </a>
-        </nav>
     <span id="welcome-msg"></span>
-    <a id="logout-link" href="logout">Logout</a>
-    <i id="avatar" class="avatar fa fa-user fa-2x"></i>
+  </header>
+  
+  <div class="container">
+    <header>
+      <p>
+        Laundry <br /> Go
+      </p>
+      
+      <p id=description>
+      A web app provides public laundry users a better experience, saving their time and improve efficiency.
+      <p/>
+
+      <div id="login-form">
+        <label for="username">Username:</label>
+        <input id="username" name="username" type="text">
+        <label for="password">Password:</label>
+        <input id="password" name="password" type="password">
+        <button id="register-form-btn">New User? Register</button>
+        <button id="login-btn">Login</button>
+        <p id="login-error"></p>
+      </div>
+      
+      <div id="register-form">
+        <label for="username">Username: *</label>
+        <input id="register-username" name="username" type="text">
+        <label for="password">Password: *</label>
+        <input id="register-password" name="password" type="password">
+        <label for="first-name">First Name: *</label>
+        <input id="register-first-name" name="first-name" type="text">
+        <label for="last-name">Last Name: *</label>
+        <input id="register-last-name" name="last-name" type="text">
+        <label for="email">Email: *</label>
+        <input id="register-email" name="email" type="text">
+        <button id="login-form-btn">Back to Login</button>
+        <button id="register-btn">Register</button>
+        <p id="register-result"></p>
+      </div>
 </header>
-		
- <Section class="main-section">						  		
-   		<div>
-			<p class="grey"> Help you to</p>
-			<p class="blue">Experience a new way of laundry in only 3 steps</p>
-			<p class="grey">Book a laundry, view your laundry status, pick up your clothes</p>
-		</div> 
-		 
-   		<div id="machine_list">  
-   				  			  	
-            <p>Click "BOOK A Laundry" to Start :)</p>
-            <img src="img/login.png"/>
-           	          		          	
-     	</div>
-		 	
-			
-</Section>
-	
- 
-<script src="scripts/laundry.js"></script>
+  </div>
+  
+  <script src="https://rawgit.com/emn178/js-md5/master/build/md5.min.js"></script>
+  <script src="scripts/login.js"></script>
+  
 </body>
 </html>
